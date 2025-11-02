@@ -67,6 +67,16 @@ public class SinglyLinkedListModularForm {
 		singlyLinkedList.display();
 		singlyLinkedList.insertAtGivenPosition(3, 31);
 		singlyLinkedList.display();
+//		deleting first node
+		System.out.println("deleting first node: " + singlyLinkedList.deleteFirst().data);
+		singlyLinkedList.display();
+		System.out.println("deleting first node: " + singlyLinkedList.deleteFirst().data);
+		singlyLinkedList.display();
+//		deleting last node
+		System.out.println("deleting last node: " + singlyLinkedList.deleteLast().data);
+		singlyLinkedList.display();
+		System.out.println("deleting last node: " + singlyLinkedList.deleteLast().data);
+		singlyLinkedList.display();
 	}
 //	printing elements of LinkedList
 	public void display() {
@@ -208,6 +218,57 @@ public class SinglyLinkedListModularForm {
 		}
 	}
 	
+	
+//	delete first node
+//	what should be return type of method which is deleting node?
+//	Return type -> node or ListNode
+//	1------->8------->31------->15-
+	public ListNode deleteFirst() {
+		
+//		true -> no node to delete
+		if(head == null) {
+			return null;
+		}
+		
+//		create temp node -> make temp referring to head
+		ListNode current = head;
+//		jump head to next node before deleting
+		head = head.next;
+//		breaking the link of current node and make it pointing to null
+		current.next = null;
+		return current;
+		
+	}
+	
+	
+	
+//	delete last node 
+//	1------->8------->31------->15
+//	we need one reference to second last node before breaking the link between last node and second last node
+//	make second last node referring to null
+//	checking two condition -> 1. no node i.e. empty LinkedList  2. only one node
+	public ListNode deleteLast() {
+		
+		if(head == null || head.next == null) {
+			return head;
+		}
+		
+//		we need to jump from head node to last node one by one
+		ListNode current = head;
+//		Before breaking link b/w last node and second last node, we need to point second last node referring to null.
+		ListNode previous = null;
+		while(current.next != null) {
+//			before jumping current node, we are assigning current to previous
+			previous = current;
+//			jumping current node one by one
+			current = current.next;
+		}
+		
+//		making second last node pointing to null
+		previous.next = null;
+//		now last node is free to return
+		return current;
+	}
 	
 	
 	
